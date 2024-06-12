@@ -177,7 +177,7 @@ async function run() {
     app.delete("/course/:id", verifyJWT, async (req, res) => {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
-      const result = await Collection.deleteOne(filter);
+      const result = await courseCollection.deleteOne(filter);
       res.send(result);
     });
 
