@@ -60,7 +60,6 @@ async function run() {
     const careerNestDB = client.db("careerNest");
 
     const usersCollection = careerNestDB.collection("users");
-    const categoriesCollection = careerNestDB.collection("categories");
     const jobsCollection = careerNestDB.collection("jobs");
 
     // ---------------------------- Users Routes --------------------
@@ -170,45 +169,6 @@ async function run() {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
       const result = await jobsCollection.deleteOne(filter);
-      res.send(result);
-    });
-
-    // ---------------------------- categories Routes --------------------
-
-    app.post("/categories", verifyJWT, async (req, res) => {
-      const category = req.body;
-      const result = await categoriesCollection.insertOne(category);
-      res.send(result);
-    });
-
-    app.get("/categories", async (req, res) => {
-      const query = {};
-      const result = await categoriesCollection.find(query).toArray();
-      res.send(result);
-    });
-
-    app.get("/category/:id", async (req, res) => {
-      const id = req.params.id;
-
-      if (id === "all-products") {
-        const query = { saleStatus: "available" };
-        const result = await jobsCollection.find(query).toArray();
-        res.send(result);
-      } else {
-        const query = { categoryId: id, saleStatus: "available" };
-        const result = await jobsCollection.find(query).toArray();
-        res.send(result);
-      }
-    });
-
-    app.delete("/categories/:id", verifyJWT, async (req, res) => {
-      const categoryName = req.query.categoryName;
-      const query = { productCategory: categoryName };
-      await jobsCollection.deleteMany(query);
-
-      const id = req.params.id;
-      const filter = { _id: ObjectId(id) };
-      const result = await categoriesCollection.deleteOne(filter);
       res.send(result);
     });
 
