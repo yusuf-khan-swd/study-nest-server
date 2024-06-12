@@ -216,9 +216,9 @@ async function run() {
 run().catch(console.log);
 
 app.get("/", (req, res) => {
-  res.send("Career Nest server is running");
+  res.send("Study Nest server is running");
 });
 
 app.listen(port, () => {
-  console.log(`Career Nest server is running on port ${port}`);
+  console.log(`Study Nest server is running on port ${port}`);
 });
