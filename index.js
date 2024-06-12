@@ -134,20 +134,20 @@ async function run() {
       res.send(result);
     });
 
-    // ---------------------------- Jobs Routes --------------------
+    // ---------------------------- Course Routes --------------------
 
-    app.post("/jobs", verifyJWT, async (req, res) => {
+    app.post("/course", verifyJWT, async (req, res) => {
       const jobData = req.body;
       const result = await courseCollection.insertOne(jobData);
       res.send(result);
     });
 
-    app.get("/jobs", async (req, res) => {
+    app.get("/course", async (req, res) => {
       const result = await courseCollection.find({}).toArray();
       res.send(result);
     });
 
-    app.get("/jobs/:id", async (req, res) => {
+    app.get("/course/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
 
@@ -155,18 +155,18 @@ async function run() {
       res.send(result);
     });
 
-    app.patch("/jobs/:id", verifyJWT, async (req, res) => {
+    app.patch("/course/:id", verifyJWT, async (req, res) => {
       const id = req.params.id;
-      const jobsData = req.body;
+      const courseData = req.body;
 
       const filter = { _id: ObjectId(id) };
-      const updatedDoc = { $set: jobsData };
+      const updatedDoc = { $set: courseData };
 
       const result = await courseCollection.updateOne(filter, updatedDoc);
       res.send(result);
     });
 
-    app.delete("/jobs/:id", verifyJWT, async (req, res) => {
+    app.delete("/course/:id", verifyJWT, async (req, res) => {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
       const result = await courseCollection.deleteOne(filter);
