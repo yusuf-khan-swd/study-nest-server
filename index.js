@@ -198,7 +198,7 @@ async function run() {
       const optionOne = { upsert: true };
       const updatedDocOne = {
         $set: {
-          saleStatus: "paid",
+          paymentStatus: "paid",
         },
       };
       await ordersCollection.updateOne(filterOne, updatedDocOne, optionOne);
@@ -207,7 +207,7 @@ async function run() {
       const optionTwo = { upsert: true };
       const updatedDocTwo = {
         $set: {
-          saleStatus: "paid",
+          paymentStatus: "paid",
         },
       };
       await productsCollection.updateOne(filterTwo, updatedDocTwo, optionTwo);
