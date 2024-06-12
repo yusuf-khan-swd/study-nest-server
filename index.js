@@ -57,10 +57,10 @@ const verifyJWT = (req, res, next) => {
 
 async function run() {
   try {
-    const careerNestDB = client.db("careerNest");
+    const careerNestDB = client.db("studyNest");
 
     const usersCollection = careerNestDB.collection("users");
-    const jobsCollection = careerNestDB.collection("jobs");
+    const courseCollection = careerNestDB.collection("course");
 
     // ---------------------------- Users Routes --------------------
 
@@ -137,12 +137,12 @@ async function run() {
 
     app.post("/jobs", verifyJWT, async (req, res) => {
       const jobData = req.body;
-      const result = await jobsCollection.insertOne(jobData);
+      const result = await courseCollection.insertOne(jobData);
       res.send(result);
     });
 
     app.get("/jobs", async (req, res) => {
-      const result = await jobsCollection.find({}).toArray();
+      const result = await courseCollection.find({}).toArray();
       res.send(result);
     });
 
@@ -150,7 +150,7 @@ async function run() {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
 
-      const result = await jobsCollection.findOne(filter);
+      const result = await courseCollection.findOne(filter);
       res.send(result);
     });
 
@@ -161,14 +161,14 @@ async function run() {
       const filter = { _id: ObjectId(id) };
       const updatedDoc = { $set: jobsData };
 
-      const result = await jobsCollection.updateOne(filter, updatedDoc);
+      const result = await courseCollection.updateOne(filter, updatedDoc);
       res.send(result);
     });
 
     app.delete("/jobs/:id", verifyJWT, async (req, res) => {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
-      const result = await jobsCollection.deleteOne(filter);
+      const result = await courseCollection.deleteOne(filter);
       res.send(result);
     });
 
