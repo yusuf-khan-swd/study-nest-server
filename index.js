@@ -149,6 +149,12 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/my-course", async (req, res) => {
+      const email = req.query.email;
+      const result = await courseCollection.find({ email: email }).toArray();
+      res.send(result);
+    });
+
     app.get("/course/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
@@ -171,7 +177,7 @@ async function run() {
     app.delete("/course/:id", verifyJWT, async (req, res) => {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
-      const result = await courseCollection.deleteOne(filter);
+      const result = await Collection.deleteOne(filter);
       res.send(result);
     });
 
