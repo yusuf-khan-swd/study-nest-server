@@ -125,6 +125,7 @@ async function run() {
       });
     });
 
+    // TODO: add verifyUser middleware for delete
     app.delete("/users", async (req, res) => {
       const email = req.query.email;
 
