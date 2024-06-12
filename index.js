@@ -61,6 +61,8 @@ async function run() {
 
     const usersCollection = careerNestDB.collection("users");
     const courseCollection = careerNestDB.collection("course");
+    const ordersCollection = careerNestDB.collection("orders");
+    const paymentsCollection = careerNestDB.collection("payments");
 
     // ---------------------------- Users Routes --------------------
 
