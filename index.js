@@ -210,7 +210,12 @@ async function run() {
       }
 
       const result = await courseCollection.deleteOne(filter);
-      res.send(result);
+
+      res.status(200).send({
+        success: true,
+        message: "Course delete success",
+        data: result,
+      });
     });
 
     // ---------------------------- Payment Routes --------------------
