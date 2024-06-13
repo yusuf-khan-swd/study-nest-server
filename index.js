@@ -61,7 +61,7 @@ async function run() {
 
     const usersCollection = careerNestDB.collection("users");
     const courseCollection = careerNestDB.collection("course");
-    const enrollCourseCollection = careerNestDB.collection("enroll");
+    const enrollCollection = careerNestDB.collection("enroll");
     const paymentsCollection = careerNestDB.collection("payments");
 
     // ---------------------------- Users Routes --------------------
@@ -238,7 +238,7 @@ async function run() {
     app.post("/payments", async (req, res) => {
       const payment = req.body;
 
-      await enrollCourseCollection.insertOne(payment);
+      await enrollCollection.insertOne(payment);
 
       const result = await paymentsCollection.insertOne(payment);
       res.send(result);
