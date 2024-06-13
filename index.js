@@ -164,14 +164,22 @@ async function run() {
     });
 
     app.patch("/course/:id", verifyJWT, async (req, res) => {
+      const email = req.decoded?.email;
       const id = req.params.id;
       const courseData = req.body;
 
       const filter = { _id: ObjectId(id) };
+
+      const isCourseExist = await courseCollection.findOne(filter);
+
+      if (!isCourseExist) {
+        return res.status(404).send({ message: "Course not found!" });
+      }
+
       const updatedDoc = { $set: courseData };
 
-      const result = await courseCollection.updateOne(filter, updatedDoc);
-      res.send(result);
+      // const result = await courseCollection.updateOne(filter, updatedDoc);
+      // res.send(result);
     });
 
     app.delete("/course/:id", verifyJWT, async (req, res) => {
