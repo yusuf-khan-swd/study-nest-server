@@ -183,8 +183,13 @@ async function run() {
         });
       }
 
-      // const result = await courseCollection.updateOne(filter, updatedDoc);
-      // res.send(result);
+      const result = await courseCollection.updateOne(filter, updatedDoc);
+
+      res.status(200).send({
+        success: true,
+        message: "Course updated success",
+        data: result,
+      });
     });
 
     app.delete("/course/:id", verifyJWT, async (req, res) => {
