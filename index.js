@@ -176,14 +176,11 @@ async function run() {
       if (!isCourseExist) {
         return res.status(404).send({ message: "Course not found!" });
       }
-      console.log(isCourseExist);
 
       if (isCourseExist?.email !== email) {
-        return res
-          .status(500)
-          .send({
-            message: "Forbidden access. User is not creator of this course",
-          });
+        return res.status(401).send({
+          message: "Forbidden access. User is not creator of this course",
+        });
       }
 
       // const result = await courseCollection.updateOne(filter, updatedDoc);
