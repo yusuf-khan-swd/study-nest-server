@@ -149,7 +149,7 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/my-course", async (req, res) => {
+    app.get("/my-course", verifyJWT, async (req, res) => {
       const email = req.query.email;
       const result = await courseCollection.find({ email: email }).toArray();
       res.send(result);
