@@ -169,14 +169,22 @@ async function run() {
       const courseData = req.body;
 
       const filter = { _id: ObjectId(id) };
+      const updatedDoc = { $set: courseData };
 
       const isCourseExist = await courseCollection.findOne(filter);
 
       if (!isCourseExist) {
         return res.status(404).send({ message: "Course not found!" });
       }
+      console.log(isCourseExist);
 
-      const updatedDoc = { $set: courseData };
+      if (isCourseExist?.email !== email) {
+        return res
+          .status(500)
+          .send({
+            message: "Forbidden access. User is not creator of this course",
+          });
+      }
 
       // const result = await courseCollection.updateOne(filter, updatedDoc);
       // res.send(result);
