@@ -269,6 +269,13 @@ async function run() {
     app.delete("/enroll/:id", verifyJWT, async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
+
+      const enrollDataExist = await enrollCollection.findOne(query);
+
+      if (!enrollDataExist) {
+        return res.status(404).send({ message: "Enroll data is not found!" });
+      }
+
       const result = await enrollCollection.deleteOne(query);
       res.send(result);
     });
