@@ -61,7 +61,7 @@ async function run() {
 
     const usersCollection = careerNestDB.collection("users");
     const courseCollection = careerNestDB.collection("course");
-    const ordersCollection = careerNestDB.collection("orders");
+    const enrollCourseCollection = careerNestDB.collection("enroll");
     const paymentsCollection = careerNestDB.collection("payments");
 
     // ---------------------------- Users Routes --------------------
@@ -246,7 +246,11 @@ async function run() {
           paymentStatus: "paid",
         },
       };
-      await ordersCollection.updateOne(filterOne, updatedDocOne, optionOne);
+      await enrollCourseCollection.updateOne(
+        filterOne,
+        updatedDocOne,
+        optionOne
+      );
 
       const filterTwo = { _id: ObjectId(productId) };
       const optionTwo = { upsert: true };
