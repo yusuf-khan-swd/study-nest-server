@@ -193,8 +193,22 @@ async function run() {
     });
 
     app.delete("/course/:id", verifyJWT, async (req, res) => {
+      const email = req.decoded?.email;
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
+
+      const isCourseExist = await courseCollection.findOne(filter);
+
+      if (!isCourseExist) {
+        return res.status(404).send({ message: "Course not found!" });
+      }
+
+      if (isCourseExist?.email !== email) {
+        return res.status(401).send({
+          message: "Forbidden access. User is not creator of this course",
+        });
+      }
+
       const result = await courseCollection.deleteOne(filter);
       res.send(result);
     });
