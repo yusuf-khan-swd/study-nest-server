@@ -236,9 +236,9 @@ async function run() {
     });
 
     app.post("/payments", async (req, res) => {
-      const payment = req.body;
+      const { payment, course } = req.body;
 
-      await enrollCollection.insertOne(payment);
+      await enrollCollection.insertOne({ ...payment, course });
 
       const result = await paymentsCollection.insertOne(payment);
       res.send(result);
