@@ -243,6 +243,35 @@ async function run() {
       const result = await paymentsCollection.insertOne(payment);
       res.send(result);
     });
+
+    // ---------------------------- Enroll Routes --------------------
+
+    app.post("/enroll", verifyJWT, async (req, res) => {
+      const order = req.body;
+      const result = await enrollCollection.insertOne(order);
+      res.send(result);
+    });
+
+    app.get("/enroll", verifyJWT, async (req, res) => {
+      const decodedEmail = req.decoded.email;
+      const query = { email: decodedEmail };
+      const result = await enrollCollection.find(query).toArray();
+      res.send(result);
+    });
+
+    app.get("/enroll/:id", verifyJWT, async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await enrollCollection.findOne(query);
+      res.send(result);
+    });
+
+    app.delete("/enroll/:id", verifyJWT, async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await enrollCollection.deleteOne(query);
+      res.send(result);
+    });
   } finally {
   }
 }
