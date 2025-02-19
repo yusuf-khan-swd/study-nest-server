@@ -4,6 +4,7 @@ import { Router } from 'express';
 // import { orderRoutes } from '../modules/Order/order.routes';
 // import { paymentRoutes } from '../modules/Payment/payment.routes';
 // import { ReviewRoutes } from '../modules/Review/review.route';
+import { CourseRoutes } from '../modules/Course/course.route';
 import { UserRoutes } from '../modules/User/user.route';
 
 const router = Router();
@@ -13,10 +14,10 @@ const moduleRoutes = [
   //   path: '/auth',
   //   route: AuthRoutes,
   // },
-  // {
-  //   path: '/cars',
-  //   route: CarRoutes,
-  // },
+  {
+    path: '/courses',
+    route: CourseRoutes,
+  },
   // {
   //   path: '/reviews',
   //   route: ReviewRoutes,
