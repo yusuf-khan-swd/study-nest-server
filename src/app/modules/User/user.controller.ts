@@ -3,6 +3,18 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { UserService } from './user.service';
 
+const createUser = catchAsync(async (req, res) => {
+  const data = req.body;
+  const result = await UserService.createUser(data);
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: 'User Created Successfully',
+    data: result,
+  });
+});
+
 const createAdmin = catchAsync(async (req, res) => {
   const data = req.body;
 
@@ -91,4 +103,5 @@ export const UserController = {
   deleteUser,
   getSingleUser,
   makeAdmin,
+  createUser,
 };
