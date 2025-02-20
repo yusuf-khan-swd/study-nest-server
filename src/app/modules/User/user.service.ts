@@ -5,6 +5,17 @@ import { USER_ROLE } from './user.constant';
 import { TUser } from './user.interface';
 import { User } from './user.model';
 
+const createUser = async (payload: TUser) => {
+  const isUserExists = await User.findOne({ email: payload.email });
+
+  if (isUserExists)
+    throw new AppError(httpStatus.BAD_REQUEST, 'User already Exist !');
+
+  const data = { ...payload, role: USER_ROLE.user };
+  const result = await User.create(data);
+  return result;
+};
+
 const createAdmin = async (payload: TUser) => {
   const isUserExists = await User.findOne({ email: payload.email });
 
@@ -73,4 +84,5 @@ export const UserService = {
   deleteUser,
   getSingleUser,
   makeAdmin,
+  createUser,
 };
