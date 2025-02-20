@@ -30,11 +30,16 @@ router.patch(
 
 router.put(
   '/:id',
+  auth(USER_ROLE.admin, USER_ROLE.user),
   validateRequest(UserValidation.userUpdateValidationSchema),
   UserController.updateUser,
 );
 
 router.get('/', UserController.getAllUsers);
-router.delete('/:id', auth(USER_ROLE.admin), UserController.deleteUser);
+router.delete(
+  '/:id',
+  auth(USER_ROLE.admin, USER_ROLE.user),
+  UserController.deleteUser,
+);
 
 export const UserRoutes = router;
