@@ -1,19 +1,47 @@
 import httpStatus from 'http-status';
 import QueryBuilder from '../../builder/QueryBuilder';
+import config from '../../config';
 import AppError from '../../errors/AppError';
 import { USER_ROLE } from './user.constant';
 import { TUser } from './user.interface';
 import { User } from './user.model';
+import { createToken } from './user.utils';
 
 const userAuth = async (payload: TUser) => {
   const isUserExists = await User.findOne({ email: payload.email });
 
-  if (isUserExists)
-    throw new AppError(httpStatus.BAD_REQUEST, 'User already Exist !');
+  if (isUserExists) {
+    const jwtPayload = {
+      email: isUserExists?.email,
+      role: isUserExists?.role,
+      id: isUserExists?._id,
+    };
+
+    const accessToken = createToken(
+      jwtPayload,
+      config.jwt_secret as string,
+      config.jwt_expires_in as string,
+    );
+
+    return { user: isUserExists, accessToken };
+  }
 
   const data = { ...payload, role: USER_ROLE.user };
   const result = await User.create(data);
-  return result;
+
+  const jwtPayload = {
+    email: result.email,
+    role: result.role,
+    id: result._id,
+  };
+
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_secret as string,
+    config.jwt_expires_in as string,
+  );
+
+  return { user: result, accessToken };
 };
 
 const createAdmin = async (payload: TUser) => {
