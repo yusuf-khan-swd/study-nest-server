@@ -3,9 +3,9 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { UserService } from './user.service';
 
-const createUser = catchAsync(async (req, res) => {
+const userAuth = catchAsync(async (req, res) => {
   const data = req.body;
-  const result = await UserService.createUser(data);
+  const result = await UserService.userAuth(data);
 
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
@@ -103,5 +103,5 @@ export const UserController = {
   deleteUser,
   getSingleUser,
   makeAdmin,
-  createUser,
+  userAuth,
 };

@@ -10,7 +10,7 @@ const router = express.Router();
 router.post(
   '/',
   validateRequest(UserValidation.userValidationSchema),
-  UserController.createUser,
+  UserController.userAuth,
 );
 
 router.post(

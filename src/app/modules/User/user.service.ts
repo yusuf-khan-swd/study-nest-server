@@ -5,7 +5,7 @@ import { USER_ROLE } from './user.constant';
 import { TUser } from './user.interface';
 import { User } from './user.model';
 
-const createUser = async (payload: TUser) => {
+const userAuth = async (payload: TUser) => {
   const isUserExists = await User.findOne({ email: payload.email });
 
   if (isUserExists)
@@ -84,5 +84,5 @@ export const UserService = {
   deleteUser,
   getSingleUser,
   makeAdmin,
-  createUser,
+  userAuth,
 };
