@@ -5,6 +5,7 @@ import { Router } from 'express';
 // import { paymentRoutes } from '../modules/Payment/payment.routes';
 // import { ReviewRoutes } from '../modules/Review/review.route';
 import { CourseRoutes } from '../modules/Course/course.route';
+import { PaymentRoutes } from '../modules/Payment/payment.route';
 import { UserRoutes } from '../modules/User/user.route';
 
 const router = Router();
@@ -26,14 +27,10 @@ const moduleRoutes = [
     path: '/users',
     route: UserRoutes,
   },
-  // {
-  //   path: '/orders',
-  //   route: orderRoutes,
-  // },
-  // {
-  //   path: '/payment',
-  //   route: paymentRoutes,
-  // },
+  {
+    path: '/payments',
+    route: PaymentRoutes,
+  },
 ];
 
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
