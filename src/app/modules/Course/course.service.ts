@@ -51,12 +51,7 @@ const deleteCourse = async (id: string) => {
     throw new AppError(httpStatus.NOT_FOUND, 'Course not found');
   }
 
-  const result = await Course.findByIdAndUpdate(
-    id,
-    { isDeleted: true },
-    { new: true },
-  );
-
+  const result = await Course.findByIdAndDelete(id);
   return result;
 };
 
