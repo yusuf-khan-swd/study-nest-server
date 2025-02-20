@@ -9,4 +9,5 @@ export default {
   database_url: process.env.DATABASE_URL,
   jwt_secret: process.env.JWT_SECRET,
   jwt_expires_in: process.env.JWT_EXPIRES_IN,
+  stripe_secret: process.env.STRIPE_SECRET,
 };
