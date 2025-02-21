@@ -36,6 +36,27 @@ const getAllCourse = catchAsync(async (req, res) => {
   }
 });
 
+const getAllAdminCourse = catchAsync(async (req, res) => {
+  const user = req.user;
+  const result = await CourseService.getAllAdminCourse(user);
+
+  if (result.length > 0) {
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Admin Courses retrieved successfully',
+      data: result,
+    });
+  } else {
+    sendResponse(res, {
+      statusCode: httpStatus.NOT_FOUND,
+      success: true,
+      message: 'No Data Found',
+      data: result,
+    });
+  }
+});
+
 const getSingleCourse = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await CourseService.getSingleCourse(id);
@@ -78,4 +99,5 @@ export const CourseController = {
   getSingleCourse,
   updateCourse,
   deleteCourse,
+  getAllAdminCourse,
 };

@@ -1,4 +1,5 @@
 import httpStatus from 'http-status';
+import { JwtPayload } from 'jsonwebtoken';
 import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../../errors/AppError';
 import { TCourse } from './course.interface';
@@ -17,6 +18,12 @@ const getAllCourse = async (query: Record<string, unknown>) => {
     .fields();
 
   const result = await courseQuery.modelQuery;
+  return result;
+};
+
+const getAllAdminCourse = async (user: JwtPayload) => {
+  const { email } = user;
+  const result = await Course.find({ email });
   return result;
 };
 
@@ -61,4 +68,5 @@ export const CourseService = {
   getSingleCourse,
   updateCourse,
   deleteCourse,
+  getAllAdminCourse,
 };

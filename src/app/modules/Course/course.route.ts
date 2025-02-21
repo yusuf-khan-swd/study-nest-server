@@ -15,6 +15,7 @@ router.post(
 );
 
 router.get('/', CourseController.getAllCourse);
+router.get('/admin-courses', CourseController.getAllAdminCourse);
 
 router.get('/:id', CourseController.getSingleCourse);
 
