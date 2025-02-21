@@ -1,6 +1,7 @@
 import httpStatus from 'http-status';
-import QueryBuilder from '../../builder/QueryBuilder';
+import { JwtPayload } from 'jsonwebtoken';
 import AppError from '../../errors/AppError';
+import { User } from '../User/user.model';
 import { TEnroll } from './enroll.interface';
 import { Enroll } from './enroll.model';
 
@@ -9,14 +10,18 @@ const createEnroll = async (payload: TEnroll) => {
   return result;
 };
 
-const getAllEnroll = async (query: Record<string, unknown>) => {
-  const enrollQuery = new QueryBuilder(Enroll.find(), query)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
+const getAllUserEnroll = async (user: JwtPayload) => {
+  const { email } = user;
 
-  const result = await enrollQuery.modelQuery;
+  const isUserExist = await User.findOne({ email: email });
+
+  if (!isUserExist)
+    throw new AppError(httpStatus.NOT_FOUND, 'User does not exist');
+
+  const result = await Enroll.find({ email: email })
+    .populate('course')
+    .sort('-createdAt');
+
   return result;
 };
 
@@ -43,7 +48,7 @@ const deleteEnroll = async (id: string) => {
 
 export const EnrollService = {
   createEnroll,
-  getAllEnroll,
+  getAllUserEnroll,
   getSingleEnroll,
   deleteEnroll,
 };
