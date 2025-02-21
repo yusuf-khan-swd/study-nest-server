@@ -48,18 +48,6 @@ const getSingleEnroll = catchAsync(async (req, res) => {
   });
 });
 
-const updateEnroll = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await EnrollService.updateEnroll(id, req.body);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Enroll updated successfully',
-    data: result,
-  });
-});
-
 const deleteEnroll = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await EnrollService.deleteEnroll(id);
@@ -76,6 +64,5 @@ export const EnrollController = {
   createEnroll,
   getAllEnroll,
   getSingleEnroll,
-  updateEnroll,
   deleteEnroll,
 };
