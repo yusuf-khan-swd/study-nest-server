@@ -30,20 +30,6 @@ const getSingleEnroll = async (id: string) => {
   return result;
 };
 
-const updateEnroll = async (id: string, payload: Partial<TEnroll>) => {
-  const isEnrollExists = await Enroll.findById(id);
-
-  if (!isEnrollExists) {
-    throw new AppError(httpStatus.NOT_FOUND, 'Enroll not found');
-  }
-
-  const result = await Enroll.findByIdAndUpdate(id, payload, {
-    new: true,
-  });
-
-  return result;
-};
-
 const deleteEnroll = async (id: string) => {
   const isEnrollExists = await Enroll.findById(id);
 
@@ -59,6 +45,5 @@ export const EnrollService = {
   createEnroll,
   getAllEnroll,
   getSingleEnroll,
-  updateEnroll,
   deleteEnroll,
 };
