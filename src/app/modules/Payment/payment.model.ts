@@ -15,7 +15,7 @@ const paymentSchema = new Schema<TPayment>(
       type: String,
       required: true,
     },
-    courseId: {
+    course: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: 'Course',
