@@ -1,8 +1,7 @@
+import { Types } from 'mongoose';
+
 export type TEnroll = {
-  title: string;
-  duration: string;
-  instructor: string;
-  price: string;
-  description: string;
   email: string;
+  payment: Types.ObjectId;
+  course: Types.ObjectId;
 };
