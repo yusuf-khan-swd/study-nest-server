@@ -16,8 +16,9 @@ const createEnroll = catchAsync(async (req, res) => {
   });
 });
 
-const getAllEnroll = catchAsync(async (req, res) => {
-  const result = await EnrollService.getAllEnroll(req.query);
+const getAllUserEnroll = catchAsync(async (req, res) => {
+  const user = req.user;
+  const result = await EnrollService.getAllUserEnroll(user);
 
   if (result.length > 0) {
     sendResponse(res, {
@@ -62,7 +63,7 @@ const deleteEnroll = catchAsync(async (req, res) => {
 
 export const EnrollController = {
   createEnroll,
-  getAllEnroll,
+  getAllUserEnroll,
   getSingleEnroll,
   deleteEnroll,
 };
