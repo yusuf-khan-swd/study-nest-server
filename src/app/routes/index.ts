@@ -17,16 +17,16 @@ const moduleRoutes = [
   //   route: AuthRoutes,
   // },
   {
+    path: '/users',
+    route: UserRoutes,
+  },
+  {
     path: '/courses',
     route: CourseRoutes,
   },
   {
     path: '/enrolls',
     route: EnrollRoutes,
-  },
-  {
-    path: '/users',
-    route: UserRoutes,
   },
   {
     path: '/payments',
