@@ -9,6 +9,12 @@
 
 [10:19 PM 2/20/2025 Done] - initial completion of Payment module
 
+Initial completion of user module
+
 [11:19 AM 2/20/2025 Done] - Course module crud operation completed
+
+--------------------------- 2/19/2025
+
+Start working on the course module and setup project
 
 2/18/2025 - Start working on DataPollex Assessment Task
