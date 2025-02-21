@@ -7,6 +7,7 @@ import { EnrollValidation } from './enroll.validation';
 
 const router = express.Router();
 
+// ! I don't think post route use in client
 router.post(
   '/',
   auth(USER_ROLE.user),
