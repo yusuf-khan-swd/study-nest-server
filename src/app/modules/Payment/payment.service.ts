@@ -1,17 +1,15 @@
+import { TEnroll } from '../Enroll/enroll.interface';
+import { Enroll } from '../Enroll/enroll.model';
 import { TPayment } from './payment.interface';
 import { Payment } from './payment.model';
 
-const createPayment = async (payload: {
-  payment: TPayment;
-  course: string;
-}) => {
-  const { payment, course } = payload;
+const createPayment = async (payload: TPayment) => {
+  const result = await Payment.create(payload);
 
-  console.log(course);
+  const { email, course } = payload;
+  const enrollData: TEnroll = { email, course, payment: result._id };
+  await Enroll.create(enrollData);
 
-  // TODO: Add course data to enroll collection
-
-  const result = await Payment.create(payment);
   return result;
 };
 
