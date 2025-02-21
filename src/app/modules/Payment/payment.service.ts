@@ -1,6 +1,10 @@
+import { TPayment } from './payment.interface';
 import { Payment } from './payment.model';
 
-const createPayment = async (payload: any) => {
+const createPayment = async (payload: {
+  payment: TPayment;
+  course: string;
+}) => {
   const { payment, course } = payload;
 
   console.log(course);
