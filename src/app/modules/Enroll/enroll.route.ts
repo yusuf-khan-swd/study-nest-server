@@ -14,9 +14,9 @@ router.post(
   EnrollController.createEnroll,
 );
 
-router.get('/', EnrollController.getAllEnroll);
+router.get('/my-enroll', auth(USER_ROLE.user), EnrollController.getAllEnroll);
 
-router.get('/:id', EnrollController.getSingleEnroll);
+router.get('/:id', auth(USER_ROLE.user), EnrollController.getSingleEnroll);
 
 router.delete('/:id', auth(USER_ROLE.user), EnrollController.deleteEnroll);
 
