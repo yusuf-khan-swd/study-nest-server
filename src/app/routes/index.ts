@@ -5,6 +5,7 @@ import { Router } from 'express';
 // import { paymentRoutes } from '../modules/Payment/payment.routes';
 // import { ReviewRoutes } from '../modules/Review/review.route';
 import { CourseRoutes } from '../modules/Course/course.route';
+import { EnrollRoutes } from '../modules/Enroll/enroll.route';
 import { PaymentRoutes } from '../modules/Payment/payment.route';
 import { UserRoutes } from '../modules/User/user.route';
 
@@ -19,10 +20,10 @@ const moduleRoutes = [
     path: '/courses',
     route: CourseRoutes,
   },
-  // {
-  //   path: '/reviews',
-  //   route: ReviewRoutes,
-  // },
+  {
+    path: '/enrolls',
+    route: EnrollRoutes,
+  },
   {
     path: '/users',
     route: UserRoutes,
