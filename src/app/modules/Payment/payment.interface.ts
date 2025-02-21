@@ -4,5 +4,5 @@ export type TPayment = {
   price: string;
   transactionId: string;
   email: string;
-  courseId: mongoose.Types.ObjectId;
+  course: mongoose.Types.ObjectId;
 };
