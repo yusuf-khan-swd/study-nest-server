@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Application route
-app.use('/api', router);
+app.use('', router);
 
 app.post('/create-payment-intent', async (req, res) => {
   const price = req.body.productPrice;
