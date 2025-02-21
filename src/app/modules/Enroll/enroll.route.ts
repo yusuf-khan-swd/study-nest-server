@@ -9,8 +9,8 @@ const router = express.Router();
 
 router.post(
   '/',
-  auth(USER_ROLE.admin),
-  validateRequest(EnrollValidation.createCourseValidationSchema),
+  auth(USER_ROLE.user),
+  validateRequest(EnrollValidation.createEnrollValidationSchema),
   EnrollController.createEnroll,
 );
 
@@ -18,13 +18,6 @@ router.get('/', EnrollController.getAllEnroll);
 
 router.get('/:id', EnrollController.getSingleEnroll);
 
-router.put(
-  '/:id',
-  auth(USER_ROLE.admin),
-  validateRequest(EnrollValidation.updateCourseValidationSchema),
-  EnrollController.updateEnroll,
-);
-
-router.delete('/:id', auth(USER_ROLE.admin), EnrollController.deleteEnroll);
+router.delete('/:id', auth(USER_ROLE.user), EnrollController.deleteEnroll);
 
 export const EnrollRoutes = router;
