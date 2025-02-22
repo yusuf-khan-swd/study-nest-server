@@ -20,7 +20,11 @@ router.post(
   UserController.createAdmin,
 );
 
-router.get('/:id', UserController.getSingleUser);
+router.get(
+  '/:id',
+  auth(USER_ROLE.admin, USER_ROLE.user),
+  UserController.getSingleUser,
+);
 
 router.patch(
   '/make-admin/:id',
