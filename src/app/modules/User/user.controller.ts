@@ -60,6 +60,18 @@ const getAllUsers = catchAsync(async (req, res) => {
   }
 });
 
+const getUserProfile = catchAsync(async (req, res) => {
+  const email = req?.query?.email;
+  const result = await UserService.getUserProfile(email as string);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User profile retrieve successfully',
+    data: result,
+  });
+});
+
 const getSingleUser = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await UserService.getSingleUser(id);
@@ -104,4 +116,5 @@ export const UserController = {
   getSingleUser,
   makeAdmin,
   userAuth,
+  getUserProfile,
 };

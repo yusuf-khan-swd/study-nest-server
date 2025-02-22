@@ -21,6 +21,12 @@ router.post(
 );
 
 router.get(
+  '/profile',
+  auth(USER_ROLE.admin, USER_ROLE.user),
+  UserController.getUserProfile,
+);
+
+router.get(
   '/:id',
   auth(USER_ROLE.admin, USER_ROLE.user),
   UserController.getSingleUser,

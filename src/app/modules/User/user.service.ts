@@ -76,6 +76,16 @@ const getAllUsers = async (query: Record<string, unknown>) => {
   return result;
 };
 
+const getUserProfile = async (email: string) => {
+  const result = await User.findOne({ email });
+
+  if (!result) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  return result;
+};
+
 const getSingleUser = async (id: string) => {
   const result = await User.findById(id);
 
@@ -113,4 +123,5 @@ export const UserService = {
   getSingleUser,
   makeAdmin,
   userAuth,
+  getUserProfile,
 };
