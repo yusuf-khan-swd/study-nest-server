@@ -27,9 +27,16 @@ router.get(
 );
 
 router.get(
-  '/:id',
+  '/profile/:id',
   auth(USER_ROLE.admin, USER_ROLE.user),
   UserController.getSingleUser,
+);
+
+router.put(
+  '/profile/:id',
+  auth(USER_ROLE.admin, USER_ROLE.user),
+  validateRequest(UserValidation.userUpdateValidationSchema),
+  UserController.updateUser,
 );
 
 router.patch(
@@ -38,14 +45,8 @@ router.patch(
   UserController.makeAdmin,
 );
 
-router.put(
-  '/:id',
-  auth(USER_ROLE.admin, USER_ROLE.user),
-  validateRequest(UserValidation.userUpdateValidationSchema),
-  UserController.updateUser,
-);
-
 router.get('/', UserController.getAllUsers);
+
 router.delete(
   '/:id',
   auth(USER_ROLE.admin, USER_ROLE.user),
