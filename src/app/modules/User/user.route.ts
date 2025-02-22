@@ -45,7 +45,7 @@ router.patch(
   UserController.makeAdmin,
 );
 
-router.get('/', UserController.getAllUsers);
+router.get('/', auth(USER_ROLE.admin), UserController.getAllUsers);
 
 router.delete(
   '/:id',
