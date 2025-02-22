@@ -15,11 +15,7 @@ router.post(
   EnrollController.createEnroll,
 );
 
-router.get(
-  '/user-enrolls',
-  auth(USER_ROLE.user),
-  EnrollController.getAllUserEnroll,
-);
+router.get('/', auth(USER_ROLE.user), EnrollController.getAllUserEnroll);
 
 router.get('/:id', auth(USER_ROLE.user), EnrollController.getSingleEnroll);
 
