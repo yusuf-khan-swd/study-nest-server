@@ -32,7 +32,7 @@ router.get(
   UserController.getSingleUser,
 );
 
-router.put(
+router.patch(
   '/profile/:id',
   auth(USER_ROLE.admin, USER_ROLE.user),
   validateRequest(UserValidation.userUpdateValidationSchema),
