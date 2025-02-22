@@ -7,7 +7,7 @@ import { EnrollValidation } from './enroll.validation';
 
 const router = express.Router();
 
-// ! I don't think post route use in client
+// ! I don't think post route use in client because insert in enroll done by payment route
 router.post(
   '/',
   auth(USER_ROLE.user),
