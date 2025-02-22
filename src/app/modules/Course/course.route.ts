@@ -23,7 +23,7 @@ router.get(
 
 router.get('/:id', CourseController.getSingleCourse);
 
-router.put(
+router.patch(
   '/:id',
   auth(USER_ROLE.admin),
   validateRequest(CourseValidation.updateCourseValidationSchema),
