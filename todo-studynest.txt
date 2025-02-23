@@ -1,4 +1,8 @@
 
+--------------------------- 10:33 AM 2/23/2025
+
+Deploy the server on Vercel new project 
+
 --------------------------- 10:25 AM 2/21/2025
 
 7:37 PM 2/21/2025 - Start connecting update server with MVC Pattern to local client side
